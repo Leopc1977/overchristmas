@@ -13,6 +13,7 @@ windowHeight = 704
 
 buttonState = ""
 
+myGameRessources = require("gameRessources")
 
 function player.load()
 
@@ -22,8 +23,9 @@ player.width = player.walk[1]:getWidth()
 player.height = player.walk[1]:getHeight()
 player.scaleX = 0.15
 player.scaleY = 0.15
+player.state = "walk"
 
-
+--myLib.CreeSprite("sprite","Walk (1)", player.x,player.y )
 
 end
 
@@ -32,22 +34,22 @@ function player.update()
 	player.oldX = player.x
 	player.oldY = player.y
 
-	  	if love.keyboard.isDown("up") then
+	  	if love.keyboard.isDown("up") or love.keyboard.isDown("z") or love.keyboard.isDown("w") then
 	  		player.y = player.y - 400 * dt
 	  		buttonState = "up"
 		end
 
-	  	if love.keyboard.isDown("down") then
+	  	if love.keyboard.isDown("down") or love.keyboard.isDown("s") or love.keyboard.isDown("s")then
 	  		player.y = player.y + 400 * dt
 	  		buttonState = "down"
 		end  
 
-		if love.keyboard.isDown("right") then
+		if love.keyboard.isDown("right") or love.keyboard.isDown("d") then
 	  		player.x = player.x + 400 * dt
 	  		buttonState = "right"
 		end
 
-		if love.keyboard.isDown("left") then
+		if love.keyboard.isDown("left") or love.keyboard.isDown("q") or love.keyboard.isDown("a") then
 	  		player.x = player.x - 400 * dt
 	  		buttonState = "left"
 		end
@@ -71,24 +73,41 @@ function player.update()
     if myMap.isSolid(id) then
 
         print("collision avec une tuile solide !!")
+	     if tileType == "tableVGUn" or
+	     tileType == "tableVGDeux" or
+	     tileType == "tableVGTrois" or
+	     tileType == "tableVGQuatre" then
+	     if player.state ~= "keep" then
+	     	myLib.CreeSprite(objects,myLib.giftBlue, pX, pY)
+	     end
 
     end
+end
 
 end
 
 function player.draw()
 
-	love.graphics.draw(player.walk[1], player.x, player.y,0,player.scaleX, player.scaleY)--,player.width/2,player.height/2)
+	--love.graphics.draw(player.walk[1], player.x, player.y,0,player.scaleX, player.scaleY,player.width/2,player.height/2)
+
 	love.graphics.print(player.x,1,10)
 	love.graphics.print(player.y,1,20)
 
-	local col = math.floor(player.x/myMap.TILE_SIZE) + 1
-	local lig = math.floor(player.y/myMap.TILE_SIZE) + 1
+	x, y = love.mouse.getPosition( )
+	local col = math.floor(x/myMap.TILE_SIZE) + 1
+	local lig = math.floor(y/myMap.TILE_SIZE) + 1
 
 	if col>0 and col<=map.MAP_WIDTH and lig>0 and lig<=map.MAP_HEIGHT then
 		id = map.Map.table[lig][col]
 		love.graphics.print("ID:"..tostring(id),1,1)
+		love.graphics.print("x:"..tostring(x),1,30)
+		love.graphics.print("y:"..tostring(y),1,40)
 	end
+
+  	for n=1,#myLib.liste_sprites do
+  	  local s = lib.liste_sprites[n]
+   	 love.graphics.draw(s.image, s.x, s.y, 0, player.scaleX, player.scaleY, s.l/2, s.h/2)
+ 	 end
 
 end
 

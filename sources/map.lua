@@ -1,5 +1,7 @@
 map = {}
 
+myLib = require("lib")
+
 map.MAP_WIDTH = 18
 map.MAP_HEIGHT = 11
 map.TILE_SIZE = 16*4
@@ -65,12 +67,12 @@ function map.update()
 end
 
 function map.isSolid(pID)
-  local tileType = map.tileTypes[pID]
+  tileType = map.tileTypes[pID]
   if tileType == "tableVGUn" or
      tileType == "tableVGDeux" or
      tileType == "tableVGTrois" or
      tileType == "tableVGQuatre" then
-    return true
+    return true, tileType
   end
   
   return false
@@ -101,18 +103,6 @@ function map.draw()
       end
     end
   end
-
-
-	local x = love.mouse.getX()
-	local y = love.mouse.getY()
-	local col = math.floor(x/myMap.TILE_SIZE) + 1
-	local lig = math.floor(y/myMap.TILE_SIZE) + 1
-
-
-	if col>0 and col<=map.MAP_WIDTH and lig>0 and lig<=map.MAP_HEIGHT then
-		id = map.Map.floor[lig][col]
-		love.graphics.print("ID:"..tostring(id),1,1)
-	end
 
 end
 
