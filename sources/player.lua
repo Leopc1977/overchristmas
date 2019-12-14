@@ -10,6 +10,9 @@ dt = 1/60
 windowWidth = 1152
 windowHeight = 704
 
+buttonState = ""
+
+
 function player.load()
 
 player.x = 100
@@ -28,18 +31,22 @@ function player.update()
 
 	  	if love.keyboard.isDown("up") then
 	  		player.y = player.y - 400 * dt
+	  		buttonState = "up"
 		end
 
 	  	if love.keyboard.isDown("down") then
 	  		player.y = player.y + 400 * dt
+	  		buttonState = "down"
 		end  
 
 		if love.keyboard.isDown("right") then
 	  		player.x = player.x + 400 * dt
+	  		buttonState = "right"
 		end
 
 		if love.keyboard.isDown("left") then
 	  		player.x = player.x - 400 * dt
+	  		buttonState = "left"
 		end
 
 	player.x = math.floor(player.x)
@@ -58,21 +65,11 @@ function player.update()
 		player.y = 0
 	end
 
-	local x = love.mouse.getX()
-	local y = love.mouse.getY()
-	local col = math.floor(player.x/myMap.TILE_SIZE) + 1
-	local lig = math.floor(player.y/myMap.TILE_SIZE) + 1
+    if myMap.isSolid(id) then
 
-	if col>0 and col<=map.MAP_WIDTH and lig>0 and lig<=map.MAP_HEIGHT then
-		id = map.Map.floor[lig][col]
-		love.graphics.print("ID:"..tostring(id),1,1)
-	end
-
-    --[[if myMap.isSolid(id) then
         print("collision avec une tuile solide !!")
-    	player.x = player.oldX
-        player.y = player.oldY 
-    end]]--
+
+    end
 
 end
 
@@ -81,6 +78,15 @@ function player.draw()
 	love.graphics.draw(player.walk[1], player.x, player.y,0,player.scaleX, player.scaleY)--,player.width/2,player.height/2)
 	love.graphics.print(player.x,1,10)
 	love.graphics.print(player.y,1,20)
+
+	local col = math.floor(player.x/myMap.TILE_SIZE) + 1
+	local lig = math.floor(player.y/myMap.TILE_SIZE) + 1
+
+	if col>0 and col<=map.MAP_WIDTH and lig>0 and lig<=map.MAP_HEIGHT then
+		id = map.Map.table[lig][col]
+		love.graphics.print("ID:"..tostring(id),1,1)
+	end
+
 end
 
 return player
