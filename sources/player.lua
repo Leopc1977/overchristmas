@@ -1,7 +1,6 @@
 player = {}
 
 myMap = require ("map")
-myGame = require("game")
 
 player.walk = {}
 player.walk[1] = love.graphics.newImage("images/sprite/Walk (1).png")
@@ -28,30 +27,34 @@ function player.update()
 	player.oldY = player.y
 
 	  	if love.keyboard.isDown("up") then
-	  		player.y = player.y - 350 * dt
+	  		player.y = player.y - 400 * dt
 		end
 
 	  	if love.keyboard.isDown("down") then
-	  		player.y = player.y + 350 * dt
+	  		player.y = player.y + 400 * dt
 		end  
 
 		if love.keyboard.isDown("right") then
-	  		player.x = player.x + 350 * dt
+	  		player.x = player.x + 400 * dt
 		end
 
 		if love.keyboard.isDown("left") then
-	  		player.x = player.x - 350 * dt
+	  		player.x = player.x - 400 * dt
 		end
+
+	player.x = math.floor(player.x)
+	player.y = math.floor(player.y)
+
 	if player.x < 0 then
-		player.x = windowWidth
+		player.x = windowHeight
 	end
-	if player.x > windowWidth then
+	if player.x > windowHeight then
 		player.x = 0
 	end
 	if player.y < 0 then
-		player.y = windowHeight
+		player.y = windowWidth
 	end
-	if player.y > windowHeight then
+	if player.y > windowWidth then
 		player.y = 0
 	end
 
@@ -75,8 +78,9 @@ end
 
 function player.draw()
 
-	love.graphics.draw(player.walk[1], player.x, player.y,0,player.scaleX, player.scaleY,player.width/2,player.height/2)
-
+	love.graphics.draw(player.walk[1], player.x, player.y,0,player.scaleX, player.scaleY)--,player.width/2,player.height/2)
+	love.graphics.print(player.x,1,10)
+	love.graphics.print(player.y,1,20)
 end
 
 return player

@@ -78,9 +78,6 @@ function map.draw()
 		love.graphics.print("ID:"..tostring(id),1,1)
 	end
 
-	love.graphics.print("X : "..tostring(x),1,10)
-	love.graphics.print("Y : "..tostring(y),1,20)	
-
 end
 
 return map
