@@ -29,7 +29,6 @@ print("Loading")
   map.Texture[0] = nil
   map.Texture[1] = love.graphics.newImage("images/map/floor.png")
 
-print("finish")
 
 map.tileTypes = {}
 map.tileTypes[1] = "floor"
@@ -78,6 +77,9 @@ function map.draw()
 		id = map.Map.floor[lig][col]
 		love.graphics.print("ID:"..tostring(id),1,1)
 	end
+
+	love.graphics.print("X : "..tostring(x),1,10)
+	love.graphics.print("Y : "..tostring(y),1,20)	
 
 end
 

@@ -1,14 +1,15 @@
 player = {}
 
 myMap = require ("map")
+myGame = require("game")
 
 player.walk = {}
 player.walk[1] = love.graphics.newImage("images/sprite/Walk (1).png")
 
 dt = 1/60
 
-window = {}
-window.width, window.height = love.graphics.getDimensions( )
+windowWidth = 1152
+windowHeight = 704
 
 function player.load()
 
@@ -42,15 +43,15 @@ function player.update()
 	  		player.x = player.x - 350 * dt
 		end
 	if player.x < 0 then
-		player.x = window.width
+		player.x = windowWidth
 	end
-	if player.x > window.width then
+	if player.x > windowWidth then
 		player.x = 0
 	end
 	if player.y < 0 then
-		player.y = window.height
+		player.y = windowHeight
 	end
-	if player.y > window.height then
+	if player.y > windowHeight then
 		player.y = 0
 	end
 
