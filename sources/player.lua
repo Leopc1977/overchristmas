@@ -1,6 +1,7 @@
 player = {}
 
 myMap = require ("map")
+myLib = require("lib")
 
 player.walk = {}
 player.walk[1] = love.graphics.newImage("images/sprite/Walk (1).png")
@@ -21,6 +22,8 @@ player.width = player.walk[1]:getWidth()
 player.height = player.walk[1]:getHeight()
 player.scaleX = 0.15
 player.scaleY = 0.15
+
+
 
 end
 
