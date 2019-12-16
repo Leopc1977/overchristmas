@@ -2,7 +2,7 @@ lib = {}
 
 lib.liste_sprites = {}
 
-function lib.CreeSprite(pNomDossier,pNomImage, pX, pY)
+function lib.CreeSprite(pNomDossier,pNomImage, pX, pY,offSet, scaleX, scaleY)
 
   sprite = {}
   sprite.x = pX

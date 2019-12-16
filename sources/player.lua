@@ -3,6 +3,7 @@ player = {}
 myCollisions = require("collisions")
 myMap = require ("map")
 myLib = require("lib")
+myGameRessources = require("gameRessources")
 
 player.walk = {}
 player.walk[1] = love.graphics.newImage("images/sprite/Walk (1).png")
@@ -20,14 +21,16 @@ windowHeight = 704
 
 buttonState = "" -- a supprimer peut etre 
 
-myGameRessources = require("gameRessources")
+player.state= {}
+player.state.keep = false
+player.state.keeping = false
 
 -- A SUPPRIMER LOG
 nbGift = 0
 
 function player.load()
 
-player.state = "walk"
+
 
 end
 
@@ -88,13 +91,14 @@ function player.update()
 
 		 ]]--
 
-		 if love.mouse.isDown(1) and tileType == "tableVGUn" or
+		 if player.state.keep == false and tileType == "tableVGUn" or
 		     tileType == "tableVGDeux" or
 		     tileType == "tableVGTrois" or
 		     tileType == "tableVGQuatre"  then
-		 	player.state = "keep"
 		 	print("state keep !!")
 		 	nbGift = nbGift + 1
+		 	player.state.keep = true
+		 	player.state.keeping = true
 		 end		 
 
 	end
@@ -105,9 +109,10 @@ function player.draw()
 
 	love.graphics.draw(player.walk[1], player.x, player.y,0,player.scaleX, player.scaleY,player.width/2,player.height/2)
 
-	if player.state == "keep" then
-		--myLib.CreeSprite(objects,myLib.gift.blue, pX, pY)
-		love.graphics.draw(gameRessources.gift.blue.img, player.x, player.y,0,2,2)
+	if player.state.keep == true and player.state.keeping == true then
+		myLib.CreeSprite("objects","giftBlue", "player.x", "player.y")
+		--love.graphics.draw(gameRessources.gift.blue.img, player.x, player.y,0,2,2)
+		player.state.keeping = false
 	end
 
 	--player param
@@ -120,7 +125,7 @@ function player.draw()
 	love.graphics.print(player.y,1,20)
 
 	--mouse param
-	x, y = love.mouse.getPosition( )
+	x, y = love.mouse.getPosition()
 	local col = math.floor(x/myMap.TILE_SIZE) + 1
 	local lig = math.floor(y/myMap.TILE_SIZE) + 1
 
