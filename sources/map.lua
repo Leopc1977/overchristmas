@@ -28,12 +28,12 @@ map.Map.table = {
   {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
   {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
   {0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+  {0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
   {0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+  {0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+  {0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
   {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-  {0,0,0,0,0,0,0,4,0,0,4,0,0,0,0,0,0,0},
+  {0,0,0,0,0,0,0,6,0,0,6,0,0,0,0,0,0,0},
   {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 }
 
@@ -44,10 +44,11 @@ print("Loading")
   map.Texture = {}
   map.Texture[0] = nil
   map.Texture[1] = love.graphics.newImage("images/map/floor.png")
-  map.Texture[2] = love.graphics.newImage("images/objects/tableVG.png")
-  map.Texture[3] = love.graphics.newImage("images/objects/tableVD.png")
-  map.Texture[4] = love.graphics.newImage("images/objects/tableH.png")
+  map.Texture[2] = love.graphics.newImage("images/objects/tableVGUn.png")
+  map.Texture[3] = love.graphics.newImage("images/objects/tableVGDeux.png")
+  map.Texture[4] = love.graphics.newImage("images/objects/tableVGTrois.png")
   map.Texture[5] = love.graphics.newImage("images/objects/tableVGQuatre.png")
+  map.Texture[6] = love.graphics.newImage("images/objects/tableH.png")
 
 map.tileTypes = {}
 map.tileTypes[1] = "floor"
@@ -62,7 +63,7 @@ end
 
 function map.update()
 	
-
+  
 	
 end
 

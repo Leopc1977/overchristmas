@@ -1,31 +1,33 @@
 player = {}
 
+myCollisions = require("collisions")
 myMap = require ("map")
 myLib = require("lib")
 
 player.walk = {}
 player.walk[1] = love.graphics.newImage("images/sprite/Walk (1).png")
-
-dt = 1/60
-
-windowWidth = 1152
-windowHeight = 704
-
-buttonState = ""
-
-myGameRessources = require("gameRessources")
-
-function player.load()
-
 player.x = 100
 player.y = 100
 player.width = player.walk[1]:getWidth()
 player.height = player.walk[1]:getHeight()
 player.scaleX = 0.15
 player.scaleY = 0.15
-player.state = "walk"
 
---myLib.CreeSprite("sprite","Walk (1)", player.x,player.y )
+dt = 1/60
+
+windowWidth = 1152
+windowHeight = 704
+
+buttonState = "" -- a supprimer peut etre 
+
+myGameRessources = require("gameRessources")
+
+-- A SUPPRIMER LOG
+nbGift = 0
+
+function player.load()
+
+player.state = "walk"
 
 end
 
@@ -70,44 +72,66 @@ function player.update()
 		player.y = 0
 	end
 
-    if myMap.isSolid(id) then
+	local col = math.floor(player.x/myMap.TILE_SIZE) + 1
+	local lig = math.floor(player.y/myMap.TILE_SIZE) + 1
+	player.id = map.Map.table[lig][col]
+
+    if myMap.isSolid(player.id) then
 
         print("collision avec une tuile solide !!")
-	     if tileType == "tableVGUn" or
-	     tileType == "tableVGDeux" or
-	     tileType == "tableVGTrois" or
-	     tileType == "tableVGQuatre" then
-	     if player.state ~= "keep" then
-	     	myLib.CreeSprite(objects,myLib.giftBlue, pX, pY)
-	     end
 
-    end
-end
+        --MEMO tileType
+	     --[[tileType == "tableVGUn" 
+		     tileType == "tableVGDeux" 
+		     tileType == "tableVGTrois" 
+		     tileType == "tableVGQuatre" 
+
+		 ]]--
+
+		 if love.mouse.isDown(1) and tileType == "tableVGUn" or
+		     tileType == "tableVGDeux" or
+		     tileType == "tableVGTrois" or
+		     tileType == "tableVGQuatre"  then
+		 	player.state = "keep"
+		 	print("state keep !!")
+		 	nbGift = nbGift + 1
+		 end		 
+
+	end
 
 end
 
 function player.draw()
 
-	--love.graphics.draw(player.walk[1], player.x, player.y,0,player.scaleX, player.scaleY,player.width/2,player.height/2)
+	love.graphics.draw(player.walk[1], player.x, player.y,0,player.scaleX, player.scaleY,player.width/2,player.height/2)
+
+	if player.state == "keep" then
+		--myLib.CreeSprite(objects,myLib.gift.blue, pX, pY)
+		love.graphics.draw(gameRessources.gift.blue.img, player.x, player.y,0,2,2)
+	end
+
+	--player param
+	local col = math.floor(player.x/myMap.TILE_SIZE) + 1
+	local lig = math.floor(player.y/myMap.TILE_SIZE) + 1
+	id = map.Map.table[lig][col]
+	love.graphics.print("ID:"..tostring(id),1,1)
 
 	love.graphics.print(player.x,1,10)
 	love.graphics.print(player.y,1,20)
 
+	--mouse param
 	x, y = love.mouse.getPosition( )
 	local col = math.floor(x/myMap.TILE_SIZE) + 1
 	local lig = math.floor(y/myMap.TILE_SIZE) + 1
 
 	if col>0 and col<=map.MAP_WIDTH and lig>0 and lig<=map.MAP_HEIGHT then
 		id = map.Map.table[lig][col]
-		love.graphics.print("ID:"..tostring(id),1,1)
-		love.graphics.print("x:"..tostring(x),1,30)
-		love.graphics.print("y:"..tostring(y),1,40)
+		love.graphics.print("ID:"..tostring(id),50,1)
+		love.graphics.print("x:"..tostring(x),50,20)
+		love.graphics.print("y:"..tostring(y),50,30)
 	end
 
-  	for n=1,#myLib.liste_sprites do
-  	  local s = lib.liste_sprites[n]
-   	 love.graphics.draw(s.image, s.x, s.y, 0, player.scaleX, player.scaleY, s.l/2, s.h/2)
- 	 end
+	love.graphics.print (nbGift,500,1)
 
 end
 
