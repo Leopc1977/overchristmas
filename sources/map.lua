@@ -23,7 +23,7 @@ map.Map.floor = {
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 }
 
-map.Map.table = {
+map.Map.toy = {
   {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
   {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
   {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
@@ -31,9 +31,9 @@ map.Map.table = {
   {0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
   {0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
   {0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+  {0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
   {0,6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-  {0,0,0,0,0,0,0,6,0,0,6,0,0,0,0,0,0,0},
+  {0,0,0,0,0,0,0,7,8,9,10,0,0,0,0,0,0,0},
   {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 }
 
@@ -45,17 +45,30 @@ print("Loading")
   map.Texture[0] = nil
   map.Texture[1] = love.graphics.newImage("images/map/floor.png")
   map.Texture[2] = love.graphics.newImage("images/objects/tableVGUn.png")
-  map.Texture[3] = love.graphics.newImage("images/objects/tableVGDeux.png")
-  map.Texture[4] = love.graphics.newImage("images/objects/tableVGTrois.png")
-  map.Texture[5] = love.graphics.newImage("images/objects/tableVGQuatre.png")
-  map.Texture[6] = love.graphics.newImage("images/objects/tableH.png")
+  map.Texture[3] = love.graphics.newImage("images/objects/tableVGDeux.png") --prendre toy
+  map.Texture[4] = love.graphics.newImage("images/objects/tableVGTrois.png") --prendre toy
+  map.Texture[5] = love.graphics.newImage("images/objects/tableVGQuatre.png") --prendre toy
+  map.Texture[6] = love.graphics.newImage("images/objects/tableH.png") --prendre toy
+
+map.Texture[7] = love.graphics.newImage("images/objects/tableHUn.png") -- deposer toy et créer cadeau
+map.Texture[8] = love.graphics.newImage("images/objects/tableHDeux.png") -- deposer toy et créer cadeau
+map.Texture[9] = love.graphics.newImage("images/objects/tableHTrois.png") -- deposer toy et créer cadeau
 
 map.tileTypes = {}
-map.tileTypes[1] = "floor"
-map.tileTypes[2] = "tableVGUn"
-map.tileTypes[3] = "tableVGDeux"
-map.tileTypes[4] = "tableVGTrois"
-map.tileTypes[5] = "tableVGQuatre"
+
+  map.tileTypes[1] = "floor"
+
+  -- TOY
+  map.tileTypes[2] = "tableVGUnToy"
+  map.tileTypes[3] = "tableVGDeuxToy"
+  map.tileTypes[4] = "tableVGTroisToy"
+  map.tileTypes[5] = "tableVGQuatreToy"
+  map.tileTypes[6] = "horizontalToy"
+
+--GIFT
+  map.tileTypes[7] = "tableHUnGift"
+  map.tileTypes[8] = "tableHDeuxGift"
+  map.tileTypes[9] = "tableHTroisGift"
 
 print("finish")
 
@@ -95,7 +108,7 @@ function map.draw()
 --table
   for l=1,myMap.MAP_HEIGHT do
     for c=1,myMap.MAP_WIDTH do
-       id = map.Map.table[l][c]
+       id = map.Map.toy[l][c]
      myMap.x = (c-1)*myMap.TILE_SIZE
      myMap.y = (l-1)*myMap.TILE_SIZE
       local tex = map.Texture[id]

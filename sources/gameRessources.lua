@@ -1,20 +1,20 @@
 gameRessources = {}
 
 gameRessources.gift = {}
-gameRessources.gift.blue = {}
-gameRessources.gift.brown = {}
-gameRessources.gift.green = {}
-gameRessources.gift.pink = {}
-gameRessources.gift.red = {}
+gameRessources.gift.car = {}
+gameRessources.gift.book = {}
+gameRessources.gift.stick = {}
+gameRessources.gift.ball = {}
+gameRessources.gift.deer = {}
 
-gameRessources.gift.blue.img = love.graphics.newImage("images/objects/giftBlue.png")
+gameRessources.gift.car.img = love.graphics.newImage("images/objects/voiture.png")
 
-gameRessources.gift.brown.img = love.graphics.newImage("images/objects/giftBrown.png")
+gameRessources.gift.book.img = love.graphics.newImage("images/objects/livre.png")
 
-gameRessources.gift.green.img = love.graphics.newImage("images/objects/giftGreen.png")
+gameRessources.gift.stick.img = love.graphics.newImage("images/objects/baton.png")
 
-gameRessources.gift.pink.img = love.graphics.newImage("images/objects/giftPink.png")
+gameRessources.gift.ball.img = love.graphics.newImage("images/objects/boule.png")
 
-gameRessources.gift.red.img = love.graphics.newImage("images/objects/giftRed.png")
+gameRessources.gift.deer.img = love.graphics.newImage("images/objects/cerf.png")
 
 return game

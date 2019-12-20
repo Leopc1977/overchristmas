@@ -21,9 +21,10 @@ windowHeight = 704
 
 buttonState = "" -- a supprimer peut etre 
 
-player.state= {}
-player.state.keep = false
-player.state.keeping = false
+player.state = {}
+player.state.toy = false
+player.state.gift = false
+player.state.normal = true
 
 -- A SUPPRIMER LOG
 nbGift = 0
@@ -77,7 +78,7 @@ function player.update()
 
 	local col = math.floor(player.x/myMap.TILE_SIZE) + 1
 	local lig = math.floor(player.y/myMap.TILE_SIZE) + 1
-	player.id = map.Map.table[lig][col]
+	player.id = map.Map.toy[lig][col]
 
     if myMap.isSolid(player.id) then
 
@@ -86,9 +87,8 @@ function player.update()
         --MEMO tileType
 	     --[[tileType == "tableVGUn" 
 		     tileType == "tableVGDeux" 
-		     tileType == "tableVGTrois" 
+		     tileType == "tableVGTrois" 								
 		     tileType == "tableVGQuatre" 
-
 		 ]]--
 
 		 if player.state.keep == false and tileType == "tableVGUn" or
@@ -96,9 +96,6 @@ function player.update()
 		     tileType == "tableVGTrois" or
 		     tileType == "tableVGQuatre"  then
 		 	print("state keep !!")
-		 	nbGift = nbGift + 1
-		 	player.state.keep = true
-		 	player.state.keeping = true
 		 end		 
 
 	end
@@ -109,16 +106,10 @@ function player.draw()
 
 	love.graphics.draw(player.walk[1], player.x, player.y,0,player.scaleX, player.scaleY,player.width/2,player.height/2)
 
-	if player.state.keep == true and player.state.keeping == true then
-		myLib.CreeSprite("objects","giftBlue", "player.x", "player.y")
-		--love.graphics.draw(gameRessources.gift.blue.img, player.x, player.y,0,2,2)
-		player.state.keeping = false
-	end
-
 	--player param
 	local col = math.floor(player.x/myMap.TILE_SIZE) + 1
 	local lig = math.floor(player.y/myMap.TILE_SIZE) + 1
-	id = map.Map.table[lig][col]
+	id = map.Map.toy[lig][col]
 	love.graphics.print("ID:"..tostring(id),1,1)
 
 	love.graphics.print(player.x,1,10)
@@ -130,7 +121,7 @@ function player.draw()
 	local lig = math.floor(y/myMap.TILE_SIZE) + 1
 
 	if col>0 and col<=map.MAP_WIDTH and lig>0 and lig<=map.MAP_HEIGHT then
-		id = map.Map.table[lig][col]
+		id = map.Map.toy[lig][col]
 		love.graphics.print("ID:"..tostring(id),50,1)
 		love.graphics.print("x:"..tostring(x),50,20)
 		love.graphics.print("y:"..tostring(y),50,30)
