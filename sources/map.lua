@@ -44,15 +44,18 @@ print("Loading")
   map.Texture = {}
   map.Texture[0] = nil
   map.Texture[1] = love.graphics.newImage("images/map/floor.png")
-  map.Texture[2] = love.graphics.newImage("images/objects/tableVGUn.png")
-  map.Texture[3] = love.graphics.newImage("images/objects/tableVGDeux.png") --prendre toy
-  map.Texture[4] = love.graphics.newImage("images/objects/tableVGTrois.png") --prendre toy
-  map.Texture[5] = love.graphics.newImage("images/objects/tableVGQuatre.png") --prendre toy
-  map.Texture[6] = love.graphics.newImage("images/objects/tableH.png") --prendre toy
 
-map.Texture[7] = love.graphics.newImage("images/objects/tableHUn.png") -- deposer toy et créer cadeau
-map.Texture[8] = love.graphics.newImage("images/objects/tableHDeux.png") -- deposer toy et créer cadeau
-map.Texture[9] = love.graphics.newImage("images/objects/tableHTrois.png") -- deposer toy et créer cadeau
+  --TOY
+  map.Texture[2] = love.graphics.newImage("images/objects/tableVGUn.png")
+  map.Texture[3] = love.graphics.newImage("images/objects/tableVGDeux.png") 
+  map.Texture[4] = love.graphics.newImage("images/objects/tableVGTrois.png") 
+  map.Texture[5] = love.graphics.newImage("images/objects/tableVGQuatre.png") 
+  map.Texture[6] = love.graphics.newImage("images/objects/tableH.png") 
+
+  --GIFT
+  map.Texture[7] = love.graphics.newImage("images/objects/tableHUn.png") -- deposer toy et créer cadeau
+  map.Texture[8] = love.graphics.newImage("images/objects/tableHDeux.png") -- deposer toy et créer cadeau
+  map.Texture[9] = love.graphics.newImage("images/objects/tableHTrois.png") -- deposer toy et créer cadeau
 
 map.tileTypes = {}
 
@@ -82,14 +85,22 @@ end
 
 function map.isSolid(pID)
   tileType = map.tileTypes[pID]
-  if tileType == "tableVGUn" or
-     tileType == "tableVGDeux" or
-     tileType == "tableVGTrois" or
-     tileType == "tableVGQuatre" then
+  --TOY
+  if tileType == "tableVGUnToy" or
+     tileType == "tableVGDeuxToy" or
+     tileType == "tableVGTroisToy" or
+     tileType == "tableVGQuatreToy" or
+     tileType == "horizontalToy" or
+  --GIFT
+     tileType == "tableHUnGift" or
+     tileType == "tableHDeuxGift" or
+     tileType == "tableHTroisGift" then
+
     return true, tileType
   end
   
   return false
+
 end
 
 function map.draw()

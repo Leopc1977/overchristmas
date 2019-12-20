@@ -5,6 +5,7 @@ myMap = require ("map")
 myLib = require("lib")
 myGameRessources = require("gameRessources")
 
+--METTRE DANS RESSOURCES
 player.walk = {}
 player.walk[1] = love.graphics.newImage("images/sprite/Walk (1).png")
 player.x = 100
@@ -25,6 +26,15 @@ player.state = {}
 player.state.toy = false
 player.state.gift = false
 player.state.normal = true
+
+drawCond = {}
+drawCond.toy = false
+drawCond.gift = false
+
+--player param
+local col = math.floor(player.x/myMap.TILE_SIZE) + 1
+local lig = math.floor(player.y/myMap.TILE_SIZE) + 1
+local id = map.Map.toy[lig][col]
 
 -- A SUPPRIMER LOG
 nbGift = 0
@@ -80,24 +90,23 @@ function player.update()
 	local lig = math.floor(player.y/myMap.TILE_SIZE) + 1
 	player.id = map.Map.toy[lig][col]
 
-    if myMap.isSolid(player.id) then
+	--TOY
+	if player.id == 2 or
+		player.id == 3 or
+		player.id == 3 or
+		player.id == 5 or
+		player.id == 6 then
+				player.state.toy = true --etat -> jouet
+				drawCond.toy = true -- dessine jouet
+				print("trace toy")
+	end
 
-        print("collision avec une tuile solide !!")
-
-        --MEMO tileType
-	     --[[tileType == "tableVGUn" 
-		     tileType == "tableVGDeux" 
-		     tileType == "tableVGTrois" 								
-		     tileType == "tableVGQuatre" 
-		 ]]--
-
-		 if player.state.keep == false and tileType == "tableVGUn" or
-		     tileType == "tableVGDeux" or
-		     tileType == "tableVGTrois" or
-		     tileType == "tableVGQuatre"  then
-		 	print("state keep !!")
-		 end		 
-
+	if player.id == 7 or
+		player.id == 8 or 
+		player.id == 9 then
+			player.state.gift = true
+			drawCond.gift = true
+			print("trace gift")
 	end
 
 end
@@ -109,7 +118,7 @@ function player.draw()
 	--player param
 	local col = math.floor(player.x/myMap.TILE_SIZE) + 1
 	local lig = math.floor(player.y/myMap.TILE_SIZE) + 1
-	id = map.Map.toy[lig][col]
+	local id = map.Map.toy[lig][col]
 	love.graphics.print("ID:"..tostring(id),1,1)
 
 	love.graphics.print(player.x,1,10)
@@ -121,13 +130,19 @@ function player.draw()
 	local lig = math.floor(y/myMap.TILE_SIZE) + 1
 
 	if col>0 and col<=map.MAP_WIDTH and lig>0 and lig<=map.MAP_HEIGHT then
-		id = map.Map.toy[lig][col]
+		local id = map.Map.toy[lig][col]
 		love.graphics.print("ID:"..tostring(id),50,1)
 		love.graphics.print("x:"..tostring(x),50,20)
 		love.graphics.print("y:"..tostring(y),50,30)
 	end
 
-	love.graphics.print (nbGift,500,1)
+	if drawCond.toy == true then
+		love.graphics.draw(love.graphics.newImage("images/objects/voiture.png"), player.x,player.y,0, gameRessources.scaleX, gameRessources.scaleY)
+	end
+
+	if drawCond.gift == true then
+		love.graphics.draw(myGameRessources.gift.blue.img,player.x,player.y,0,gameRessources.scaleX,gameRessources.scaleY)
+	end		
 
 end
 
