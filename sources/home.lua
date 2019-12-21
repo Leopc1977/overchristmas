@@ -1,5 +1,6 @@
 home = {}
 
+home.cond = true
 windowHeight = myMap.TILE_SIZE*myMap.MAP_WIDTH
 windowWidth = myMap.TILE_SIZE*myMap.MAP_HEIGHT
 
@@ -40,23 +41,16 @@ function home.update()
 	end
 	if selectCurrent.state == "quit" then
 		selectCurrent.y = quit.x
-		--print("quit")
 	end
-
+	
+	if selectCurrent.state == "play" and love.keyboard.isDown("return") then
+		home.cond = false
+	end
 	if selectCurrent.state == "quit" and love.keyboard.isDown("return") then
 		love.event.quit()
 	end
 
-	if selectCurrent.state == "play" and love.keyboard.isDown("return") then
 
-		while true do
-			myMap.update()
-			myPlayer.update()
-
-			myMap.draw()
-			myPlayer.draw()
-		end
-	end
 
 end
 

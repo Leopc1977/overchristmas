@@ -17,19 +17,28 @@ function game.load()
 
 	myHome.load()
 
-	--myLib.init(1)
-
 end
 
 function game.update(dt)
 	
-	myHome.update()
+	if myHome.cond == true then
+		myHome.update()
+	else
+		player.update()
+		map.update()
+		print("trace map/update up")
+	end
 
 end
 
 function game.draw()
 
-	myHome.draw()
+	if myHome.cond == true then
+		myHome.draw()
+	else
+		player.draw()
+		map.draw()
+	end
 
 end
 
