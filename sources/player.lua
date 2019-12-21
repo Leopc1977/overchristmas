@@ -7,7 +7,7 @@ myGameRessources = require("gameRessources")
 
 
 player.walk = {}
-player.walk[1] = love.graphics.newImage("images/sprite/Walk (1).png")
+player.walk[1] = love.graphics.newImage("images/sprite/Walk (2).png")
 player.x = 100
 player.y = 100
 player.width = player.walk[1]:getWidth()
@@ -66,7 +66,7 @@ buttonState = "" -- a supprimer peut etre
 player.state = {}
 player.state.toy = false
 player.state.gift = false
-player.state.normal = true
+--player.state.normal = true
 
 drawCond = {}
 drawCond.toy = false
@@ -136,15 +136,20 @@ function player.update()
 		player.id == 3 or
 		player.id == 3 or
 		player.id == 5 or
-		player.id == 6 then
+		player.id == 6 and
+		player.state.gift == false then
+
 				player.state.toy = true --etat -> jouet
 				drawCond.toy = true -- dessine jouet
 				print("trace toy")
+
 	end
 
 	if player.id == 7 or
 		player.id == 8 or 
-		player.id == 9 then
+		player.id == 9 and
+		player.state.toy == false then
+
 			player.state.gift = true
 			drawCond.gift = true
 			print("trace gift")

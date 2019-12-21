@@ -17,4 +17,29 @@ function lib.CreeSprite(pNomDossier,pNomImage, pX, pY,offSet, scaleX, scaleY)
   return sprite
 end
 
+function lib.init(level)
+	
+	local initCond = true
+
+	if initCond == true then
+		
+    if level == 1 then
+
+      recipe = {}
+      recipe.blue = "car"
+      recipe.brown = "book"
+      recipe.green = "stick"
+      recipe.pink = "ball"
+      recipe.red = "deer"
+
+    end
+
+	end
+
+  initCond = false
+
+  return recipe
+
+end
+
 return lib

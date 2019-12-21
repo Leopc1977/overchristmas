@@ -2,6 +2,8 @@ game = {}
 
 myMap = require("map")
 myPlayer = require("player")
+myLib = require("lib")
+myHome = require("home")
 
 function game.load()
 	
@@ -13,19 +15,21 @@ function game.load()
 	myMap.load()
 	myPlayer.load()
 
+	myHome.load()
+
+	--myLib.init(1)
+
 end
 
 function game.update(dt)
 	
-	myMap.update()
-	myPlayer.update()
+	myHome.update()
 
 end
 
 function game.draw()
-	
-	myMap.draw()
-	myPlayer.draw()
+
+	myHome.draw()
 
 end
 
